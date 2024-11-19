@@ -16,7 +16,8 @@ public class Reports {
            System.out.println("\n-----------------------------");
             System.out.println("1. VIEW SPECIFIC REPORT");
             System.out.println("2. VIEW GENERAL REPORT");
-            System.out.println("3. EXIT");
+            System.out.println("3. VIEW COMPLETED TASKS OF EMPLOYEE");
+            System.out.println("4. EXIT");
 
             int opt = -1;
             boolean validchoice = false;
@@ -25,10 +26,10 @@ public class Reports {
                 System.out.print("Enter option: ");
                 if (sc.hasNextInt()) {
                     opt = sc.nextInt();
-                    if (opt >= 1 && opt <= 3) {
+                    if (opt >= 1 && opt <= 4) {
                         validchoice = true;
                     } else {
-                        System.out.println("Wrong input! Maximum is 3");
+                        System.out.println("Wrong input! Maximum is 4");
                     }
                 } else {
                     System.out.println("Invalid input! Please enter a number.");
@@ -40,15 +41,25 @@ public class Reports {
             switch (opt) {
                 case 1:
                     
-                 rp.viewSpecificReport();
+                
+                    rp.viewSpecificReport();
                  
                     break;
 
                 case 2:
-                rp.viewGeneralReport();
+               
+                    rp.viewGeneralReport();
                     break;
 
                 case 3:
+                    
+                
+                    rp.empCompletedTasks();
+                    
+                    break;
+                    
+                case 4:
+                    
                     System.out.println("Exiting to main menu...");
                     break;
             }
@@ -120,10 +131,27 @@ public class Reports {
         String[] genColumns = {"task_id", "task_name", "task_description", "task_assigned", "emp_lname", "task_deadline", "task_status"};
         conf.viewRecords(genQuery, genHeaders, genColumns);
     }
-    
+    public void empCompletedTasks() {
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter Employee ID: ");
+    int empId = sc.nextInt();
+
+   
+    String completedTasksQuery = "SELECT emp_id, emp_lname, COUNT (task_id) AS completed_tasks " +
+                                  "FROM tbl_employee  " +
+                                  "LEFT JOIN tbl_task  ON emp_id = task_assigned " +
+                                  "WHERE emp_id = " + empId + " AND task_status = 'Completed' " +
+                                  "GROUP BY emp_id, emp_lname";
+
+    config conf = new config();
+    String[] headers = {"Employee ID", "Employee Last Name", "Completed Tasks Count"};
+    String[] columns = {"emp_id", "emp_lname", "completed_tasks"};
+
+    conf.viewRecords(completedTasksQuery, headers, columns);
 }
-      
-     
-    
+
+}
     
 
+      
+       

@@ -144,15 +144,15 @@ public class TaskAssignment {
         }
         
         System.out.print("New task name: ");
-        String taskname = sc.next();
-        System.out.print("New Description ");
-        String description = sc.next();
+        String taskname = sc.nextLine();
+        System.out.print("New Description: ");
+        String description = sc.nextLine();
         System.out.print("New Assigned ID to: ");
-        String assigned = sc.next();
+        String assigned = sc.nextLine();
         System.out.print("New Deadline: ");
-        String deadline = sc.next();
+        String deadline = sc.nextLine();
         System.out.print("New Status: ");
-        String stat = sc.next();
+        String stat = sc.nextLine();
         
         String qry = "UPDATE tbl_task SET task_name = ?, task_description = ?, task_assigned = ?, task_deadline = ?, task_status = ? WHERE task_id = ?";
         conf.updateRecord(qry,taskname, description, assigned, deadline, stat, id );

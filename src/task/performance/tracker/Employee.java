@@ -82,20 +82,19 @@ public void empTransac(){
         String lname = sc.next();
         System.out.print("Email: ");
         String eml = sc.next();
-        System.out.print("Status: ");
-        String stat = sc.next();
-        System.out.print("Salary: ");
-        int slr = sc.nextInt();
+        System.out.print("Department: ");
+        String dept = sc.next();
         
-        String qry = "INSERT INTO tbl_employee (emp_fname, emp_lname, emp_email, emp_status, emp_salary)VALUES (?, ?, ?, ?, ?)";
+        
+        String qry = "INSERT INTO tbl_employee (emp_fname, emp_lname, emp_email, emp_dept )VALUES (?, ?, ?, ?)";
         config conf = new config();
-        conf.addRecord(qry, fname, lname, eml, stat, slr);
+        conf.addRecord(qry, fname, lname, eml, dept);
     }
     
     public void viewEmployee() {
         String qry = "SELECT * FROM tbl_employee";
-        String[] Headers = {"ID", "First name", "Last name", "Email", "Status", "Salary"};
-        String[] Columns = {"emp_id", "emp_fname", "emp_lname", "emp_email", "emp_status", "emp_salary"};
+        String[] Headers = {"ID", "First name", "Last name", "Email", "Department"};
+        String[] Columns = {"emp_id", "emp_fname", "emp_lname", "emp_email", "emp_dept"};
         config conf = new config();
         conf.viewRecords(qry, Headers, Columns);
     }
@@ -121,13 +120,11 @@ public void empTransac(){
         String lname = sc.next();
         System.out.print("New Email: ");
         String eml = sc.next();
-        System.out.print("New Status: ");
-        String stat = sc.next();
-        System.out.print("New Salary: ");
-        int slr = sc.nextInt();
+        System.out.print("Department: ");
+        String dept = sc.next();
         
-        String qry = "UPDATE tbl_employee SET emp_fname = ?, emp_lname = ?, emp_email = ?, emp_status = ?, emp_salary = ? WHERE emp_id = ?";
-        conf.updateRecord(qry,fname, lname, eml, stat, slr, id );
+        String qry = "UPDATE tbl_employee SET emp_fname = ?, emp_lname = ?, emp_email = ?, emp_dept = ? WHERE emp_id = ?";
+        conf.updateRecord(qry,fname, lname, eml, dept, id );
     }
     public void deleteEmployee(){
         Scanner sc = new Scanner(System.in);    
